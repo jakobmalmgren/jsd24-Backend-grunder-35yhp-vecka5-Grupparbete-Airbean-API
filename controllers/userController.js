@@ -2,7 +2,7 @@
 
 import userDb from "../models/userModel.js";
 
-const getUser = (req, res) => {
+const createUser = (req, res) => {
   const newUser = req.body;
   userDb.insert(newUser, (err, newDoc) => {
     if (err) {
@@ -16,4 +16,4 @@ const getUser = (req, res) => {
   });
 };
 
-export { getUser };
+export { createUser };

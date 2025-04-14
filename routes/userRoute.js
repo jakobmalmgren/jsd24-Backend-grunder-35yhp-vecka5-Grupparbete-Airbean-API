@@ -1,8 +1,8 @@
 import express from "express";
-import { getUser } from "../controllers/userController.js";
+import { createUser } from "../controllers/userController.js";
 const router = express.Router();
 
-router.post("/", getUser);
+router.post("/", createUser);
 
 // router.post("/", getMenu);
 
