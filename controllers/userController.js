@@ -11,7 +11,6 @@ const createUser = (req, res) => {
     res.status(201).json({
       message: "ny användare skapad",
       data: newDoc,
-      userId: newDoc._id,
     });
   });
 };
