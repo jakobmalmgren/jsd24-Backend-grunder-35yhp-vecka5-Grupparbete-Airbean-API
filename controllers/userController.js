@@ -1,4 +1,4 @@
-// usercontroller
+// usercontroller.
 
 import userDb from "../models/userModel.js";
 
