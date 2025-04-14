@@ -1,3 +1,5 @@
+// usercontroller
+
 import userDb from "../models/userModel.js";
 
 const getUser = (req, res) => {
