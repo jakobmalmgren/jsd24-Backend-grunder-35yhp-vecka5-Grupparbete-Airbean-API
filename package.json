@@ -1,0 +1,26 @@
+{
+  "name": "jsd24-backend-grunder-35yhp-vecka5-grupparbete-airbean-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakobmalmgren/jsd24-Backend-grunder-35yhp-vecka5-Grupparbete-Airbean-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakobmalmgren/jsd24-Backend-grunder-35yhp-vecka5-Grupparbete-Airbean-API/issues"
+  },
+  "homepage": "https://github.com/jakobmalmgren/jsd24-Backend-grunder-35yhp-vecka5-Grupparbete-Airbean-API#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nedb": "^1.8.0"
+  }
+}
