@@ -67,6 +67,7 @@ const deleteOrder = (req, res) => {
     // console.log("du är athorizerad och inloggad");
     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
   }
+  //lägga in id som genereras individuellt! ex "_id":"GGhbV0SamR6pgEgX"
   const id = req.body.id;
   if (!id) {
     return res.status(400).json({
@@ -98,7 +99,6 @@ const deleteOrder = (req, res) => {
 };
 //HÄMTAR MIN VARUKORG MED GET
 
-//kolla de!!
 const getMyOrder = (req, res) => {
   const authId = req.headers["x-api-key"];
   if (!authId) {
@@ -111,22 +111,17 @@ const getMyOrder = (req, res) => {
     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
   }
 
-  if (!req.body) {
-    return res.status(400).json({
-      message: "bodyn är tom",
-    });
-  }
-
-  orderDb.find({ authId: authId }, (err, doc) => {
+  // skicka in de id man får när skapar anv och även sparades i ENV
+  orderDb.find({ authId }, (err, doc) => {
     if (err) {
       return res
-        .status(500)
+        .status(404)
         .json({ message: "de gick inte att hitta varukorgen", error: err });
     }
     if (!doc || doc.length === 0) {
       return res
         .status(500)
-        .json({ message: "de finns ingen meny med de ID:t", error: err });
+        .json({ message: "de finns ingen varukorg med de ID:t", error: err });
     }
     res
       .status(200)
@@ -145,8 +140,7 @@ const updateorder = (req, res) => {
     // console.log("du är athorizerad och inloggad");
     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
   }
-
-  // här blir det de indivuduella ID:t ex: "_id":"GGhbV0SamR6pgEgX"
+  //lägga in id som genereras individuellt! ex "_id":"GGhbV0SamR6pgEgX"
   const updatedItemID = req.body.id;
   const newQuantity = req.body.quantity;
   if (!updatedItemID || !newQuantity) {
