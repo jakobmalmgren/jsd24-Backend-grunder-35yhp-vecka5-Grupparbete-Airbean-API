@@ -6,6 +6,8 @@ import aboutRouter from "./routes/aboutRoute.js";
 import menuRouter from "./routes/menuRoute.js"
 
 import orderRoute from "./routes/orderRoute.js";
+import historyRoute from "./routes/orderRoute.js"
+
 
 import cartStatusRoute from "./routes/statusRoute.js"
 
@@ -20,6 +22,7 @@ app.use("/api/about", aboutRouter);
 app.use("/api/menu", menuRouter);
 
 app.use("/api/cart", orderRoute);
+app.use("/api/history", historyRoute)
 
 app.use("/api/status", cartStatusRoute)
 
