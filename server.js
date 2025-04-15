@@ -1,12 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
 import userRouter from "./routes/userRoute.js";
+import orderRoute from "./routes/orderRoute.js";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 
 app.use("/api/user", userRouter);
+app.use("/api/cart", orderRoute);
 
 const PORT = process.env.PORT || 8000;
 
