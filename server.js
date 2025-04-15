@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import userRouter from "./routes/userRoute.js";
+import aboutRouter from "./routes/aboutRoute.js";
 
 import menuRouter from "./routes/menuRoute.js"
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/user", userRouter);
+app.use("/api/about", aboutRouter);
 
 app.use("/api/menu", menuRouter);
 
