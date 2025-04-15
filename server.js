@@ -6,6 +6,8 @@ import aboutRouter from "./routes/aboutRoute.js";
 import menuRouter from "./routes/menuRoute.js"
 
 import orderRoute from "./routes/orderRoute.js";
+import historyRoute from "./routes/orderRoute.js"
+
 
 
 dotenv.config();
@@ -18,6 +20,7 @@ app.use("/api/about", aboutRouter);
 app.use("/api/menu", menuRouter);
 
 app.use("/api/cart", orderRoute);
+app.use("/api/history", historyRoute)
 
 
 const PORT = process.env.PORT || 8000;
