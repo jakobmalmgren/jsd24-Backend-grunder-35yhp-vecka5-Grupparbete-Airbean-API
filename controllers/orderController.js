@@ -1,4 +1,5 @@
 import orderDb from "../models//orderModel.js";
+
 import dotenv from "dotenv";
 dotenv.config();
 //skapar order till sin varukorg
@@ -11,25 +12,26 @@ dotenv.config();
 
 // SKAPAR ORDER MED POST
 const createOrder = (req, res) => {
+  const authId = req.authId;
   // authId så används de universala Id:t som kommer från skapandet av användaren
-  const authId = req.headers["x-api-key"];
-  if (!authId) {
-    return res.status(401).json({
-      message: "du måste authorizera dig i headern med API nyckel!",
-    });
-  }
-  if (authId !== process.env.AUTH_ID) {
-    // console.log("du är athorizerad och inloggad");
-    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
-  }
+  //   const authId = req.headers["x-api-key"];
+  //   if (!authId) {
+  //     return res.status(401).json({
+  //       message: "du måste authorizera dig i headern med API nyckel!",
+  //     });
+  //   }
+  //   if (authId !== process.env.AUTH_ID) {
+  //     // console.log("du är athorizerad och inloggad");
+  //     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+  //   }
 
   // i req.body måste hela tiden de ID vi får från skapa anvädnare va me!!!!
-  const { id, title, price, desc, quantity } = req.body;
-  if (!id || !title || !price || !desc || !quantity) {
-    return res.status(400).json({
-      message: "du måste inkludera: id, title, price, desc, quantity i bodyn ",
-    });
-  }
+  //   const { id, title, price, desc, quantity } = req.body;
+  //   if (!id || !title || !price || !desc || !quantity) {
+  //     return res.status(400).json({
+  //       message: "du måste inkludera: id, title, price, desc, quantity i bodyn ",
+  //     });
+  //   }
 
   const newOrder = {
     id,
@@ -57,16 +59,16 @@ const createOrder = (req, res) => {
 
 //DELETE ORDER MED DELETE
 const deleteOrder = (req, res) => {
-  const authId = req.headers["x-api-key"];
-  if (!authId) {
-    return res.status(401).json({
-      message: "du måste authorizera dig i headern med API nyckel!",
-    });
-  }
-  if (authId !== process.env.AUTH_ID) {
-    // console.log("du är athorizerad och inloggad");
-    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
-  }
+  //   const authId = req.headers["x-api-key"];
+  //   if (!authId) {
+  //     return res.status(401).json({
+  //       message: "du måste authorizera dig i headern med API nyckel!",
+  //     });
+  //   }
+  //   if (authId !== process.env.AUTH_ID) {
+  //     // console.log("du är athorizerad och inloggad");
+  //     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+  //   }
   //lägga in id som genereras individuellt! ex "_id":"GGhbV0SamR6pgEgX"
   const id = req.body.id;
   if (!id) {
@@ -100,15 +102,15 @@ const deleteOrder = (req, res) => {
 //HÄMTAR MIN VARUKORG MED GET
 
 const getMyOrder = (req, res) => {
-  const authId = req.headers["x-api-key"];
-  if (!authId) {
-    return res.status(401).json({
-      message: "du måste authorizera dig i headern med API nyckel!",
-    });
-  }
-  if (authId !== process.env.AUTH_ID) {
-    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
-  }
+  //   const authId = req.headers["x-api-key"];
+  //   if (!authId) {
+  //     return res.status(401).json({
+  //       message: "du måste authorizera dig i headern med API nyckel!",
+  //     });
+  //   }
+  //   if (authId !== process.env.AUTH_ID) {
+  //     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+  //   }
 
   orderDb.find({}, (err, doc) => {
     if (err) {
@@ -137,16 +139,16 @@ const getMyOrder = (req, res) => {
 
 //UPPDATERAR MIN VARUKORG
 const updateorder = (req, res) => {
-  const authId = req.headers["x-api-key"];
-  if (!authId) {
-    return res.status(401).json({
-      message: "du måste authorizera dig i headern med API nyckel!",
-    });
-  }
-  if (authId !== process.env.AUTH_ID) {
-    // console.log("du är athorizerad och inloggad");
-    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
-  }
+  //   const authId = req.headers["x-api-key"];
+  //   if (!authId) {
+  //     return res.status(401).json({
+  //       message: "du måste authorizera dig i headern med API nyckel!",
+  //     });
+  //   }
+  //   if (authId !== process.env.AUTH_ID) {
+  //     // console.log("du är athorizerad och inloggad");
+  //     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+  //   }
   //lägga in id som genereras individuellt! ex "_id":"GGhbV0SamR6pgEgX"
   const updatedItemID = req.body.id;
   const newQuantity = req.body.quantity;

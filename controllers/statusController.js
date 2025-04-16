@@ -20,18 +20,19 @@ const removeAsync = promisify(orderDb.remove).bind(orderDb);
 
 // 👇 All kod hamnar här inne!
 const createCartStatus = async (req, res) => {
-  const authId = req.headers["x-api-key"];
+  const authId = req.authId;
+  //   const authId = req.headers["x-api-key"];
 
-  if (!authId) {
-    return res.status(401).json({
-      message:
-        "Du måste inkludera din Api nyckel i header för att göra en beställning",
-    });
-  }
+  //   if (!authId) {
+  //     return res.status(401).json({
+  //       message:
+  //         "Du måste inkludera din Api nyckel i header för att göra en beställning",
+  //     });
+  //   }
 
-  if (authId !== process.env.AUTH_ID) {
-    return res.status(403).json({ message: "Felaktig API-Nyckel i header" });
-  }
+  //   if (authId !== process.env.AUTH_ID) {
+  //     return res.status(403).json({ message: "Felaktig API-Nyckel i header" });
+  //   }
 
   try {
     // 1. Hämta alla produkter i varukorgen

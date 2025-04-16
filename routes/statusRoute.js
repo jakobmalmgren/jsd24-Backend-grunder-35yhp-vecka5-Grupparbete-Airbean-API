@@ -1,8 +1,9 @@
-import express from "express"
-import { createCartStatus } from "../controllers/statusController.js"
+import express from "express";
+import { checkAuthId } from "../middlewares/checkAuthId.js";
+import { createCartStatus } from "../controllers/statusController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/", createCartStatus)
+router.post("/", checkAuthId, createCartStatus);
 
-export default router
+export default router;
