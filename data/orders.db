@@ -1,4 +1,8 @@
-{"id":4,"title":"tetst","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":1,"createdAt":{"$$date":1744791419900},"_id":"hyxMtSPeYscmsVir"}
-{"id":14,"title":"thejjejjjeet","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":1,"createdAt":{"$$date":1744791427633},"_id":"kcRlerw44cDT8KDJ"}
-{"$$deleted":true,"_id":"hyxMtSPeYscmsVir"}
-{"$$deleted":true,"_id":"kcRlerw44cDT8KDJ"}
+{"id":2,"title":"Latte","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":2,"createdAt":{"$$date":1744794785228},"_id":"QCSlt5fWAg94FAEZ"}
+{"id":3,"title":"Cappuccino","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":1,"createdAt":{"$$date":1744794770548},"_id":"Sw8U4K3CQanDN1cf"}
+{"id":5,"title":"Mocca","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":3,"createdAt":{"$$date":1744794856960},"_id":"do0qv7Txk5iGh0x4"}
+{"id":8,"title":"test","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":1,"createdAt":{"$$date":1744796080288},"_id":"SnN4PjVICtXrjgn2"}
+{"$$deleted":true,"_id":"QCSlt5fWAg94FAEZ"}
+{"$$deleted":true,"_id":"SnN4PjVICtXrjgn2"}
+{"$$deleted":true,"_id":"Sw8U4K3CQanDN1cf"}
+{"$$deleted":true,"_id":"do0qv7Txk5iGh0x4"}

@@ -107,13 +107,10 @@ const getMyOrder = (req, res) => {
     });
   }
   if (authId !== process.env.AUTH_ID) {
-    // console.log("du är athorizerad och inloggad");
     return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
   }
 
-  // skicka in de id man får när skapar anv och även sparades i ENV
   orderDb.find({}, (err, doc) => {
-    //.....................
     if (err) {
       return res
         .status(404)
@@ -124,12 +121,20 @@ const getMyOrder = (req, res) => {
         .status(500)
         .json({ message: "de finns ingen varukorg med de ID:t", error: err });
     }
-    res
-      .status(200)
-      .json({ message: "varukorgen hämtades successfully", data: doc });
-    // ska vi skicka tillbaka en property med totalen?? HÄR! PRICE GGR QUANTITY
+
+    // Här räknar vi ut totalsumman
+    const totalSum = doc.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
+
+    res.status(200).json({
+      message: "varukorgen hämtades successfully",
+      total: totalSum,
+      data: doc,
+    });
   });
 };
+
 //UPPDATERAR MIN VARUKORG
 const updateorder = (req, res) => {
   const authId = req.headers["x-api-key"];
