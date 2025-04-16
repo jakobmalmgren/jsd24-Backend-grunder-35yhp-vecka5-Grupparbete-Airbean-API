@@ -1,10 +1,4 @@
-
-{"id":3,"title":"kallleeeee","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":6000,"createdAt":{"$$date":1744699526595},"_id":"1a6h2WRMk0GpiNGS"}
-{"id":411,"title":"Latte aaaMassssssssssscchiato","price":49,"desc":"Brygdddddgd på msaaassånadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":11,"createdAt":{"$$date":1744723991828},"_id":"CuguM78qiFWCEYpm"}
-{"id":41,"title":"Latte Massssssssssscchiato","price":49,"desc":"Bryggd på msssånadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":5,"createdAt":{"$$date":1744723977004},"_id":"N8CkFdEQZunlH0aG"}
-
-{"id":3,"title":"kallleeeee","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":2,"createdAt":{"$$date":1744699526595},"_id":"1a6h2WRMk0GpiNGS"}
-{"id":3,"title":"Latte","price":39,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":2,"createdAt":{"$$date":1744721752542},"_id":"4TLpVmjZ6KHxIUGs"}
-{"id":2,"title":"Cortado","price":39,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":2,"createdAt":{"$$date":1744721738471},"_id":"ImAPJrOKzW2L1X7T"}
-{"id":1,"title":"Bryggkaffe","price":39,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":2,"createdAt":{"$$date":1744721717177},"_id":"Wker25ZBe88W6JQm"}
-
+{"id":4,"title":"tetst","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":1,"createdAt":{"$$date":1744791419900},"_id":"hyxMtSPeYscmsVir"}
+{"id":14,"title":"thejjejjjeet","price":49,"desc":"Bryggd på månadens bönor.","authId":"WIhEVlBw4oV2DlFo","quantity":1,"createdAt":{"$$date":1744791427633},"_id":"kcRlerw44cDT8KDJ"}
+{"$$deleted":true,"_id":"hyxMtSPeYscmsVir"}
+{"$$deleted":true,"_id":"kcRlerw44cDT8KDJ"}

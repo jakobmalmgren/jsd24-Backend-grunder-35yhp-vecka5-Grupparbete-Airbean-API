@@ -7,14 +7,11 @@ import {
   updateorder,
 } from "../controllers/orderController.js";
 
-import { createOrder, getOrderHistory } from "../controllers/orderController.js";
-
-
 const router = express.Router();
 
 //skapaOrder router
 router.post("/", createOrder);
-router.get("/", getOrderHistory)
+// router.get("/", getOrderHistory)
 
 //deleteOrder router
 router.delete("/", deleteOrder);

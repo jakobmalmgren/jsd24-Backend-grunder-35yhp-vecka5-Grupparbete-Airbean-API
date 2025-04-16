@@ -55,7 +55,6 @@ const createOrder = (req, res) => {
   });
 };
 
-
 //DELETE ORDER MED DELETE
 const deleteOrder = (req, res) => {
   const authId = req.headers["x-api-key"];
@@ -113,7 +112,8 @@ const getMyOrder = (req, res) => {
   }
 
   // skicka in de id man får när skapar anv och även sparades i ENV
-  orderDb.find({ authId }, (err, doc) => {
+  orderDb.find({}, (err, doc) => {
+    //.....................
     if (err) {
       return res
         .status(404)
@@ -127,6 +127,7 @@ const getMyOrder = (req, res) => {
     res
       .status(200)
       .json({ message: "varukorgen hämtades successfully", data: doc });
+    // ska vi skicka tillbaka en property med totalen?? HÄR! PRICE GGR QUANTITY
   });
 };
 //UPPDATERAR MIN VARUKORG
@@ -170,38 +171,6 @@ const updateorder = (req, res) => {
 };
 
 export { createOrder, deleteOrder, getMyOrder, updateorder };
-
-
-// HÄMTAR ORDERHISTORIK FRÅN EN ANVÄNDARE
-
-// Hämtar nyckel från headers
-// Finns ingen nyckel/ej matchar nyckel i env så nekas man tillgång
-const getOrderHistory = (req, res) => {
-  const authId = req.headers["x-api-key"]
-  if (!authId || authId !== process.env.AUTH_ID) {
-    return res.status(401).json({
-      message: "Logga in för att se orderhistorik"
-    })
-  }
-
-/*   // Hämtar userId från url och söker i NeDB efter alla ordrar med samma userId
-  const userId = req.params.userId */
- 
-
-  orderDb.find({ authId }, (err, docs) => {
-    if (err) {
-      return res.status(500).json({ message: "Kunde ej hämta orderhistorik" })
-    }
-
-    res.status(200).json({
-      message: "Hämtning av oderhistorik lyckades",
-      data: docs,
-    })
-  })
-}
-
-export { createOrder, getOrderHistory };
-
 
 // i orders.db databasen-
 ///*skapas de en userID i varje obj så tar ja db.find o id:t så kommer

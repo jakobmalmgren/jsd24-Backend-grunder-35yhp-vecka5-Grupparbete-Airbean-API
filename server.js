@@ -3,14 +3,12 @@ import dotenv from "dotenv";
 import userRouter from "./routes/userRoute.js";
 import aboutRouter from "./routes/aboutRoute.js";
 
-import menuRouter from "./routes/menuRoute.js"
+import menuRouter from "./routes/menuRoute.js";
 
 import orderRoute from "./routes/orderRoute.js";
-import historyRoute from "./routes/orderRoute.js"
+import historyRoute from "./routes/historyRoute.js";
 
-
-import cartStatusRoute from "./routes/statusRoute.js"
-
+import cartStatusRoute from "./routes/statusRoute.js";
 
 dotenv.config();
 const app = express();
@@ -22,10 +20,10 @@ app.use("/api/about", aboutRouter);
 app.use("/api/menu", menuRouter);
 
 app.use("/api/cart", orderRoute);
-app.use("/api/history", historyRoute)
+app.use("/api/history", historyRoute);
 
-app.use("/api/status", cartStatusRoute)
-
+app.use("/api/status", cartStatusRoute);
+// "köper, submit"
 
 const PORT = process.env.PORT || 8000;
 
