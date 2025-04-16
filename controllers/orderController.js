@@ -8,7 +8,10 @@ dotenv.config();
 // använda både headers och body ..kollar me om de finns
 
 // skapa middleware på den me som e här nu nedanför?
+
+// SKAPAR ORDER MED POST
 const createOrder = (req, res) => {
+  // authId så används de universala Id:t som kommer från skapandet av användaren
   const authId = req.headers["x-api-key"];
   if (!authId) {
     return res.status(401).json({
@@ -17,7 +20,7 @@ const createOrder = (req, res) => {
   }
   if (authId !== process.env.AUTH_ID) {
     // console.log("du är athorizerad och inloggad");
-    res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
   }
 
   // i req.body måste hela tiden de ID vi får från skapa anvädnare va me!!!!
@@ -53,6 +56,122 @@ const createOrder = (req, res) => {
 };
 
 
+//DELETE ORDER MED DELETE
+const deleteOrder = (req, res) => {
+  const authId = req.headers["x-api-key"];
+  if (!authId) {
+    return res.status(401).json({
+      message: "du måste authorizera dig i headern med API nyckel!",
+    });
+  }
+  if (authId !== process.env.AUTH_ID) {
+    // console.log("du är athorizerad och inloggad");
+    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+  }
+  //lägga in id som genereras individuellt! ex "_id":"GGhbV0SamR6pgEgX"
+  const id = req.body.id;
+  if (!id) {
+    return res.status(400).json({
+      message: "inget _id skickat in, vilket krävs!",
+    });
+  }
+
+  if (!req.body) {
+    return res.status(400).json({
+      message: "bodyn är tom",
+    });
+  }
+  orderDb.remove({ _id: id }, (err, numberOfDocs) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "de gick inte att radera produkten", error: err });
+    }
+    if (numberOfDocs === 0) {
+      return res.status(404).json({
+        message: "produkten hittades inte!",
+      });
+    }
+    return res.status(200).json({
+      message: `produkten med ID: ${id} raderat!`,
+      numberOfDocuments: numberOfDocs,
+    });
+  });
+};
+//HÄMTAR MIN VARUKORG MED GET
+
+const getMyOrder = (req, res) => {
+  const authId = req.headers["x-api-key"];
+  if (!authId) {
+    return res.status(401).json({
+      message: "du måste authorizera dig i headern med API nyckel!",
+    });
+  }
+  if (authId !== process.env.AUTH_ID) {
+    // console.log("du är athorizerad och inloggad");
+    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+  }
+
+  // skicka in de id man får när skapar anv och även sparades i ENV
+  orderDb.find({ authId }, (err, doc) => {
+    if (err) {
+      return res
+        .status(404)
+        .json({ message: "de gick inte att hitta varukorgen", error: err });
+    }
+    if (!doc || doc.length === 0) {
+      return res
+        .status(500)
+        .json({ message: "de finns ingen varukorg med de ID:t", error: err });
+    }
+    res
+      .status(200)
+      .json({ message: "varukorgen hämtades successfully", data: doc });
+  });
+};
+//UPPDATERAR MIN VARUKORG
+const updateorder = (req, res) => {
+  const authId = req.headers["x-api-key"];
+  if (!authId) {
+    return res.status(401).json({
+      message: "du måste authorizera dig i headern med API nyckel!",
+    });
+  }
+  if (authId !== process.env.AUTH_ID) {
+    // console.log("du är athorizerad och inloggad");
+    return res.status(403).json({ message: "Felaktig API-nyckel i headern" });
+  }
+  //lägga in id som genereras individuellt! ex "_id":"GGhbV0SamR6pgEgX"
+  const updatedItemID = req.body.id;
+  const newQuantity = req.body.quantity;
+  if (!updatedItemID || !newQuantity) {
+    return res
+      .status(400)
+      .json({ message: "både id & quantity måste finnas med!" });
+  }
+  orderDb.update(
+    { _id: updatedItemID },
+    { $set: { quantity: newQuantity } },
+    (err, numberOfItemsUpdated) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({ message: "gick inte att uppdatera produkten!" });
+      }
+      if (!numberOfItemsUpdated) {
+        return res.status(404).json({ message: "produkten hittas inte" });
+      }
+      return res.status(200).json({
+        message: `uppdateringen gick bra ID nummber: ${updatedItemID} uppdaterades!`,
+        numberOfItemsUpdated: numberOfItemsUpdated,
+      });
+    }
+  );
+};
+
+export { createOrder, deleteOrder, getMyOrder, updateorder };
+
+
 // HÄMTAR ORDERHISTORIK FRÅN EN ANVÄNDARE
 
 // Hämtar nyckel från headers
@@ -82,6 +201,7 @@ const getOrderHistory = (req, res) => {
 }
 
 export { createOrder, getOrderHistory };
+
 
 // i orders.db databasen-
 ///*skapas de en userID i varje obj så tar ja db.find o id:t så kommer
