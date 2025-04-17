@@ -5,7 +5,7 @@ import { validateBody } from "../middlewares/validateBody.js";
 
 const router = express.Router();
 
-router.post("/",validateBody(createUserSchema) , createUser);
+router.post("/create",validateBody(createUserSchema) , createUser);
 router.post("/login",validateBody(loginUserSchema), loginUser);
 
 export default router;
