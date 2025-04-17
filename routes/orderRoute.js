@@ -9,11 +9,12 @@ import {
 } from "../controllers/orderController.js";
 import { validateBody } from "../middlewares/validateBody.js";
 import { createOrderSchema, deleteOrderSchema, updateOrderSchema } from "../validators/orderValidator.js";
+import { validateProductAgainstMenu } from "../middlewares/validateProductAgainstMenu.js" 
 
 const router = express.Router();
 
 //skapaOrder router
-router.post("/",checkAuthorization, validateBody(createOrderSchema), createOrder);
+router.post("/",checkAuthorization, validateBody(createOrderSchema), validateProductAgainstMenu, createOrder);
 // router.get("/", getOrderHistory)
 
 //deleteOrder router
