@@ -7,11 +7,13 @@ import {
   getMyOrder,
   updateorder,
 } from "../controllers/orderController.js";
+import { validateBody } from "../middlewares/validateBody.js";
+import { createOrderSchema } from "../validators/orderValidator.js";
 
 const router = express.Router();
 
 //skapaOrder router
-router.post("/",checkAuthorization, createOrder);
+router.post("/",checkAuthorization, validateBody(createOrderSchema), createOrder);
 // router.get("/", getOrderHistory)
 
 //deleteOrder router
