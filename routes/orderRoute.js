@@ -1,6 +1,5 @@
 import express from "express";
 import { checkAuthorization } from "../middlewares/checkAuthId.js";
-// import { checkAuthId } from "../middlewares/checkAuthId.js";
 
 import {
   createOrder,

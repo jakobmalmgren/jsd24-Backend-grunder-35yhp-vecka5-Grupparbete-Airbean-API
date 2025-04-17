@@ -1,9 +1,9 @@
 import express from "express";
-// import { checkAuthId } from "../middlewares/checkAuthId.js";
+import { checkAuthorization } from "../middlewares/checkAuthId.js";
 import { createCartStatus } from "../controllers/statusController.js";
 
 const router = express.Router();
 
-router.post("/", createCartStatus);
+router.post("/", checkAuthorization, createCartStatus);
 
 export default router;

@@ -25,12 +25,12 @@ const checkAuthorization = (req,res,next) => () {
      */
 
 
-/* onst checkAuthorization = (req, res, next) => {
+const checkAuthorization = (req, res, next) => {
   const authId = req.headers["x-api-key"]; // eller "authorization" om du hellre vill
   console.log("🔐 Mottagen authId:", authId);
   if (!authId) {
     return res.status(401).json({
-      message: "Ingen authId i header – logga in först!",
+      message: "Ingen authId i header",
     });
   }
 
@@ -53,12 +53,9 @@ const checkAuthorization = (req,res,next) => () {
     req.user = user;
     next();
   });
-}; */
+}; 
 
-const checkAuthorization = (req, res, next) => {
-    console.log("✅ Middleware körs!");
-    next();
-  };
+
   
   export { checkAuthorization };
 
