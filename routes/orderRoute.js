@@ -1,4 +1,5 @@
 import express from "express";
+import { checkAuthorization } from "../middlewares/checkAuthId.js";
 // import { checkAuthId } from "../middlewares/checkAuthId.js";
 
 import {
@@ -11,16 +12,16 @@ import {
 const router = express.Router();
 
 //skapaOrder router
-router.post("/", createOrder);
+router.post("/",checkAuthorization, createOrder);
 // router.get("/", getOrderHistory)
 
 //deleteOrder router
-router.delete("/", deleteOrder);
+router.delete("/",checkAuthorization, deleteOrder);
 
 //getMyOrder router
-router.get("/", getMyOrder);
+router.get("/",checkAuthorization, getMyOrder);
 
 //changeOrder router
-router.put("/", updateorder);
+router.put("/",checkAuthorization, updateorder);
 
 export default router;

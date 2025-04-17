@@ -1,18 +1,19 @@
 import orderDb from "../models//orderModel.js";
-
+import userDb from "../models/userModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 // SKAPAR ORDER MED POST
 const createOrder = (req, res) => {
   const { id, title, price, desc, quantity } = req.body;
-  // const key = req.header["x-keu"];
+    const authKey = req.user._id
 
   const newOrder = {
     id,
     title,
     price,
     desc,
+    authKey,
     // authId,
     // behövs authid om vi ska ändra allt??
     quantity,
