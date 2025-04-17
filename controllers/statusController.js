@@ -20,39 +20,37 @@ const removeAsync = promisify(orderDb.remove).bind(orderDb);
 
 // 👇 All kod hamnar här inne!
 const createCartStatus = async (req, res) => {
-  const authId = req.authId;
-  //   const authId = req.headers["x-api-key"];
-
-  //   if (!authId) {
-  //     return res.status(401).json({
-  //       message:
-  //         "Du måste inkludera din Api nyckel i header för att göra en beställning",
-  //     });
-  //   }
-
-  //   if (authId !== process.env.AUTH_ID) {
-  //     return res.status(403).json({ message: "Felaktig API-Nyckel i header" });
-  //   }
-
   try {
     // 1. Hämta alla produkter i varukorgen
-    const cartItems = await findAsync({ authId });
+
+    const cartItems = await findAsync({});
+    // const cartItems = await findAsync({ authId });
+    const totalSum = cartItems.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
 
     if (!cartItems || cartItems.length === 0) {
       return res.status(400).json({ message: "Varukorgen är tom" });
     }
+    const date = new Date();
+    const formattedDate = new Intl.DateTimeFormat("sv-SE", {
+      dateStyle: "short",
+      timeStyle: "short",
+    }).format(date);
 
     // 2. Skapa ett nytt orderobjekt
     const order = {
       items: cartItems,
-      createdAt: new Date(),
+      createdAt: formattedDate,
+      orderNumber: orderIdNumber,
+      total: totalSum,
     };
 
     // 3. Lägg till ordern i historiken
     await insertAsync(order);
 
-    // 4. Töm varukorgen
-    await removeAsync({ authId }, { multi: true });
+    await removeAsync({}, { multi: true });
+    // await removeAsync({ authId }, { multi: true });
 
     // 5. Svara med bekräftelse
     res.status(201).json({
