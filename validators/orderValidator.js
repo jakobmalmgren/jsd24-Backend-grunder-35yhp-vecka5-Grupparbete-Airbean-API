@@ -7,5 +7,14 @@ const createOrderSchema = Joi.object({
     price: Joi.number().required(),
     quantity: Joi.number().min(1).required(),
 });
+
+const deleteOrderSchema = Joi.object({
+    id: Joi.string().required(),
+})
+
+const updateOrderSchema = Joi.object({
+    id: Joi.string().required(),
+    quantity: Joi.number().min(1).required(),
+})
  
-export { createOrderSchema };
+export { createOrderSchema, deleteOrderSchema, updateOrderSchema };
