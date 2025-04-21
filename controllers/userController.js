@@ -1,5 +1,7 @@
 import userDb from "../models/userModel.js";
 
+//SKAPAR EN ANVÄNDARE
+
 const createUser = (req, res) => {
   const newUser = req.body;
   userDb.insert(newUser, (err, newDoc) => {
@@ -13,7 +15,15 @@ const createUser = (req, res) => {
   });
 };
 
+// när en användare är skapar får vi i ett personligt id.
+// de id:t ska vi sedan använda för att använda oss av i headern:
+//x-api-key och värdet: det personnliga id:t.
+// måste ha med denna authenfikationen överallt förutom när man kan
+// hämta hela menyn & aboutsidan.
+
+//LOGGAR IN
 const loginUser = (req, res) => {
+  //username och password ska in i body
   const { username, password } = req.body;
 
   //  Kolla om användaren finns med rätt lösenord
@@ -31,7 +41,7 @@ const loginUser = (req, res) => {
     // Användaren hittad → uppdatera isLoggedIn
     userDb.update(
       { _id: user._id }, // sök på användarens ID
-      { $set: { isLoggedIn: true } }, // sätt inloggad = true
+      { $set: { isLoggedIn: true } },
       {},
       (updateErr, numUpdated) => {
         if (updateErr) {

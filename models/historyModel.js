@@ -1,6 +1,6 @@
 import Datastore from "nedb";
 
-// databasen för about info
+// skapar history databas
 const historyDb = new Datastore({
   filename: "./data/history.db",
   autoload: true,

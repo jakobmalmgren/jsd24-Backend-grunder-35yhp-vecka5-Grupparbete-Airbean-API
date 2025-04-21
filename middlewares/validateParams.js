@@ -1,3 +1,5 @@
+//VALIDERAR PARAMS FRÅN URL NÄR MAN SKA HITTA ENSKILD PRODUKT
+
 export const validateParams = (schema) => {
   return (req, res, next) => {
     const { error, value } = schema.validate(req.params);

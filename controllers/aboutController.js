@@ -3,7 +3,7 @@ import aboutDb from "../models/aboutModel.js";
 // hämtar all about info med db find.
 const getAboutInfo = (req, res) => {
   aboutDb.findOne({}, (err, aboutInfo) => {
-    // find One letar efter första objektet i databasem , vilket är about.db
+    // find One letar efter första objektet i databasen , vilket är about.db
     if (err) {
       return res.status(500).json({ error: err }); // hittar vi inte objektet får vi ett error, 500
     }

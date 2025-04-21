@@ -6,6 +6,10 @@ import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
 
+// SAMMANFATTNINGSVIS SÅ:
+// "LÄGGER EN ORDER" SAMTIDIGT SKICKAR TILLBAKA ETA
+//
+
 // Genererar ETA
 const generateETA = (min = 2, max = 5) => {
   const mins = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -13,12 +17,11 @@ const generateETA = (min = 2, max = 5) => {
 };
 
 const orderIdNumber = uuidv4();
-// Promisify NeDB-metoder
+// Promisify NeDB-metoder för att skapa promisekod
 const findAsync = promisify(orderDb.find).bind(orderDb);
 const insertAsync = promisify(historyDb.insert).bind(historyDb);
 const removeAsync = promisify(orderDb.remove).bind(orderDb);
 
-// 👇 All kod hamnar här inne!
 const createCartStatus = async (req, res) => {
   try {
     // 1. Hämta alla produkter i varukorgen
@@ -44,13 +47,14 @@ const createCartStatus = async (req, res) => {
       createdAt: formattedDate,
       orderNumber: orderIdNumber,
       total: totalSum,
+      //....ändra? få me authid....
     };
 
     // 3. Lägg till ordern i historiken
     await insertAsync(order);
 
     await removeAsync({}, { multi: true });
-    // await removeAsync({ authId }, { multi: true });
+    //....ändra? få me authid..
 
     // 5. Svara med bekräftelse
     res.status(201).json({

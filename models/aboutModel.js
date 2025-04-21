@@ -1,9 +1,9 @@
 import Datastore from "nedb";
 
-// databasen för about info
+// skapar about databas
 const aboutDb = new Datastore({
-    filename: "./data/about.db",
-    autoload: true,
-})
+  filename: "./data/about.db",
+  autoload: true,
+});
 
 export default aboutDb;

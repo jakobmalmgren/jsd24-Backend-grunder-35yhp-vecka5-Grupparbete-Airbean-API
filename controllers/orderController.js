@@ -1,12 +1,13 @@
 import orderDb from "../models//orderModel.js";
-import userDb from "../models/userModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 
 // SKAPAR ORDER MED POST
 const createOrder = (req, res) => {
+  // HÄR MÅSTE VI HA IN ID, TITLE, PRICE, DESC OCH QUANTITY I BODY
   const { id, title, price, desc, quantity } = req.body;
-    const authKey = req.user._id
+  //kommer från middleware
+  const authKey = req.user._id;
 
   const newOrder = {
     id,
@@ -14,8 +15,6 @@ const createOrder = (req, res) => {
     price,
     desc,
     authKey,
-    // authId,
-    // behövs authid om vi ska ändra allt??
     quantity,
   };
 
@@ -35,6 +34,7 @@ const createOrder = (req, res) => {
 
 //DELETE ORDER MED DELETE
 const deleteOrder = (req, res) => {
+  //NÄR VI DELETE PRODUKT MÅSTE VI HA "_ID" FRÅN ORDERS.DB
   const id = req.body.id;
   if (!id) {
     return res.status(400).json({
@@ -64,8 +64,8 @@ const deleteOrder = (req, res) => {
     });
   });
 };
-//HÄMTAR MIN VARUKORG MED GET
 
+//HÄMTAR MIN VARUKORG MED GET
 const getMyOrder = (req, res) => {
   orderDb.find({}, (err, doc) => {
     if (err) {
@@ -92,9 +92,11 @@ const getMyOrder = (req, res) => {
   });
 };
 
-//UPPDATERAR MIN VARUKORG
+//UPPDATERAR MIN VARUKORG MED UPDATE
+
 const updateorder = (req, res) => {
-  //lägga in id som genereras individuellt! ex "_id":"GGhbV0SamR6pgEgX"
+  //NÄR VI LÄGGER TILL PRODUKT MÅSTE VI HA "_ID" FRÅN ORDERS.DB
+  //  OCH QUANTITY
   const updatedItemID = req.body.id;
   const newQuantity = req.body.quantity;
   if (!updatedItemID || !newQuantity) {

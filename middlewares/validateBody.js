@@ -1,3 +1,5 @@
+//VALIDERAR SÅ BODY MATCHAR INDIVUDUELLT JOI SCHEMAN
+
 export const validateBody = (schema) => {
   return (req, res, next) => {
     const { error, value } = schema.validate(req.body);
@@ -7,9 +9,7 @@ export const validateBody = (schema) => {
         error: error.details[0].message,
       });
     }
-    req.body = value // Tar bort extra inputs
+    req.body = value; // Tar bort extra inputs
     next();
   };
 };
-
-// // fortsätt här!
