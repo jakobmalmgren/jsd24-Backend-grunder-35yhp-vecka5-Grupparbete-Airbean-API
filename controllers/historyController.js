@@ -3,6 +3,7 @@ import historyDb from "../models/historyModel.js";
 // HÄMTAR ORDERHISTORIK FRÅN EN ANVÄNDARE
 const getOrderHistory = (req, res) => {
   const authKey = req.headers["x-api-key"];
+  const userName = req.user.username // hämtar username från middleware checkAuthId ,och finns sparad i req.User
   historyDb.find({ "items.authKey": authKey }, (err, docs) => {
     if (err) {
       return res.status(500).json({ message: "Kunde ej hämta orderhistorik" });
@@ -21,6 +22,7 @@ const getOrderHistory = (req, res) => {
       message: "Hämtning av oderhistorik lyckades",
       data: docs,
       total: totalSum,
+      username: userName
     });
   });
 };
