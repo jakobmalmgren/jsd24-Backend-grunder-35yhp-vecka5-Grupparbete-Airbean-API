@@ -1,8 +1,11 @@
 import userDb from "../models/userModel.js";
 
 //SKAPAR EN ANVÄNDARE
+// måste sätta in:
+//username & password i bodyn
 
 const createUser = (req, res) => {
+  //username & password i bodyn annars kommer valideringsfel uppstå
   const newUser = req.body;
   userDb.insert(newUser, (err, newDoc) => {
     if (err) {

@@ -2,7 +2,8 @@ import historyDb from "../models/historyModel.js";
 
 // HÄMTAR ORDERHISTORIK FRÅN EN ANVÄNDARE
 const getOrderHistory = (req, res) => {
-  historyDb.find({}, (err, docs) => {
+  const authKey = req.headers["x-api-key"];
+  historyDb.find({ "items.authKey": authKey }, (err, docs) => {
     if (err) {
       return res.status(500).json({ message: "Kunde ej hämta orderhistorik" });
     }

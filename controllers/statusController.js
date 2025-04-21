@@ -23,11 +23,13 @@ const insertAsync = promisify(historyDb.insert).bind(historyDb);
 const removeAsync = promisify(orderDb.remove).bind(orderDb);
 
 const createCartStatus = async (req, res) => {
+  const authKey = req.headers["x-api-key"];
   try {
     // 1. Hämta alla produkter i varukorgen
 
-    const cartItems = await findAsync({});
-    // const cartItems = await findAsync({ authId });
+    // const cartItems = await findAsync({});
+    const cartItems = await findAsync({ authKey });
+    //
     const totalSum = cartItems.reduce((sum, item) => {
       return sum + item.price * item.quantity;
     }, 0);
@@ -48,12 +50,14 @@ const createCartStatus = async (req, res) => {
       orderNumber: orderIdNumber,
       total: totalSum,
       //....ändra? få me authid....
+      // authKey: authKey,
     };
 
     // 3. Lägg till ordern i historiken
     await insertAsync(order);
 
-    await removeAsync({}, { multi: true });
+    // await removeAsync({}, { multi: true });
+    await removeAsync({ authKey }, { multi: true });
     //....ändra? få me authid..
 
     // 5. Svara med bekräftelse
