@@ -23,12 +23,11 @@ app.use("/api/menu", menuRouter);
 //-skapar order,-delete order, -hämtar varukorgen, -uppdatera varukorgen, (CRUD)
 app.use("/api/cart", orderRoute);
 
-//hämtar orderhistoriken (GET)
-app.use("/api/history", historyRoute);
-
 //lägga beställning(köper, bekräfta beställning) (POST)
 app.use("/api/status", cartStatusRoute);
 
+//hämtar orderhistoriken (GET)
+app.use("/api/history", historyRoute);
 
 // fångar upp om ingen route hittas
 app.use((req, res, next) => {
@@ -41,7 +40,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Serverfel" });
 });
-
 
 const PORT = process.env.PORT || 8000;
 

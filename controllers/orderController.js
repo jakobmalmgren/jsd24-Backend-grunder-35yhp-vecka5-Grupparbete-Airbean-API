@@ -67,7 +67,8 @@ const deleteOrder = (req, res) => {
 
 //HÄMTAR MIN VARUKORG MED GET
 const getMyOrder = (req, res) => {
-  orderDb.find({}, (err, doc) => {
+  const authKey = req.headers["x-api-key"]; //.......
+  orderDb.find({ authKey }, (err, doc) => {
     if (err) {
       return res
         .status(404)
@@ -76,7 +77,7 @@ const getMyOrder = (req, res) => {
     if (!doc || doc.length === 0) {
       return res
         .status(500)
-        .json({ message: "de finns ingen varukorg med de ID:t", error: err });
+        .json({ message: "de finns ingen aktiv varukorg", error: err });
     }
 
     // Här räknar vi ut totalsumman
